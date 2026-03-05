@@ -4,6 +4,7 @@ import { useState, useEffect } from 'react'
 import Link from 'next/link'
 import Image from 'next/image'
 import { usePathname } from 'next/navigation'
+import { motion, AnimatePresence } from 'framer-motion'
 import { Menu, X } from 'lucide-react'
 import { NAV_LINKS } from '@/lib/constants'
 
@@ -32,7 +33,6 @@ export default function Header() {
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-20">
-          {/* Logo */}
           <Link href="/" className="flex-shrink-0">
             <Image
               src="/logo.png"
@@ -44,7 +44,6 @@ export default function Header() {
             />
           </Link>
 
-          {/* Desktop Nav */}
           <nav className="hidden lg:flex items-center gap-8">
             {NAV_LINKS.map((link) => (
               <Link
@@ -61,7 +60,6 @@ export default function Header() {
             ))}
           </nav>
 
-          {/* CTA + Mobile Toggle */}
           <div className="flex items-center gap-4">
             <Link
               href="/contact"
@@ -80,32 +78,46 @@ export default function Header() {
         </div>
       </div>
 
-      {/* Mobile Menu */}
-      {mobileOpen && (
-        <div className="lg:hidden bg-white border-t">
-          <nav className="flex flex-col py-4 px-4 sm:px-6">
-            {NAV_LINKS.map((link) => (
+      {/* Animated Mobile Menu */}
+      <AnimatePresence>
+        {mobileOpen && (
+          <motion.div
+            className="lg:hidden bg-white border-t overflow-hidden"
+            initial={{ height: 0, opacity: 0 }}
+            animate={{ height: 'auto', opacity: 1 }}
+            exit={{ height: 0, opacity: 0 }}
+            transition={{ duration: 0.25, ease: 'easeInOut' }}
+          >
+            <nav className="flex flex-col py-4 px-4 sm:px-6">
+              {NAV_LINKS.map((link, i) => (
+                <motion.div
+                  key={link.href}
+                  initial={{ opacity: 0, x: -20 }}
+                  animate={{ opacity: 1, x: 0 }}
+                  transition={{ delay: i * 0.05 }}
+                >
+                  <Link
+                    href={link.href}
+                    className={`block py-3 text-base font-medium border-b border-gray-100 transition-colors hover:text-brand-teal ${
+                      pathname === link.href
+                        ? 'text-brand-teal'
+                        : 'text-brand-black'
+                    }`}
+                  >
+                    {link.label}
+                  </Link>
+                </motion.div>
+              ))}
               <Link
-                key={link.href}
-                href={link.href}
-                className={`py-3 text-base font-medium border-b border-gray-100 transition-colors hover:text-brand-teal ${
-                  pathname === link.href
-                    ? 'text-brand-teal'
-                    : 'text-brand-black'
-                }`}
+                href="/contact"
+                className="mt-4 inline-flex items-center justify-center px-5 py-2.5 bg-brand-teal text-white text-sm font-semibold rounded-md hover:bg-brand-teal-dark transition-colors sm:hidden"
               >
-                {link.label}
+                Get a Quote
               </Link>
-            ))}
-            <Link
-              href="/contact"
-              className="mt-4 inline-flex items-center justify-center px-5 py-2.5 bg-brand-teal text-white text-sm font-semibold rounded-md hover:bg-brand-teal-dark transition-colors sm:hidden"
-            >
-              Get a Quote
-            </Link>
-          </nav>
-        </div>
-      )}
+            </nav>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </header>
   )
 }
