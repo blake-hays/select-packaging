@@ -18,16 +18,33 @@ interface FormData {
 
 export default function ContactForm() {
   const [submitted, setSubmitted] = useState(false)
+  const [submitting, setSubmitting] = useState(false)
+  const [error, setError] = useState('')
   const {
     register,
     handleSubmit,
     formState: { errors },
   } = useForm<FormData>()
 
-  const onSubmit = (data: FormData) => {
-    // TODO: Wire to Formspree, Resend, or Next.js server action
-    console.log('Form submission:', data)
-    setSubmitted(true)
+  const onSubmit = async (data: FormData) => {
+    setSubmitting(true)
+    setError('')
+    try {
+      const res = await fetch('https://formspree.io/f/xvzwpzdz', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(data),
+      })
+      if (res.ok) {
+        setSubmitted(true)
+      } else {
+        setError('Something went wrong. Please try again or email us directly.')
+      }
+    } catch {
+      setError('Something went wrong. Please try again or email us directly.')
+    } finally {
+      setSubmitting(false)
+    }
   }
 
   if (submitted) {
@@ -168,11 +185,16 @@ export default function ContactForm() {
         />
       </div>
 
+      {error && (
+        <p className="text-red-500 text-sm">{error}</p>
+      )}
+
       <button
         type="submit"
-        className="w-full px-8 py-3 bg-brand-teal text-white font-semibold rounded-md hover:bg-brand-teal-dark transition-colors text-base"
+        disabled={submitting}
+        className="w-full px-8 py-3 bg-brand-teal text-white font-semibold rounded-md hover:bg-brand-teal-dark transition-colors text-base disabled:opacity-50 disabled:cursor-not-allowed"
       >
-        Request a Quote
+        {submitting ? 'Sending...' : 'Request a Quote'}
       </button>
     </form>
   )

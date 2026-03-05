@@ -1,6 +1,7 @@
 'use client'
 
 import Link from 'next/link'
+import Image from 'next/image'
 import { motion } from 'framer-motion'
 import { ArrowRight, User, Target, Eye, Zap } from 'lucide-react'
 import HeroSection from '@/components/HeroSection'
@@ -63,14 +64,20 @@ export default function AboutPage() {
             </motion.div>
 
             <motion.div
-              className="bg-gradient-to-br from-brand-teal/10 to-brand-gray rounded-2xl h-80 lg:h-96 flex items-center justify-center"
+              className="relative rounded-2xl h-80 lg:h-96 overflow-hidden"
               initial={{ opacity: 0, x: 30 }}
               whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.6 }}
             >
               {/* TODO: Replace with real company photo */}
-              <p className="text-brand-slate text-sm">Company Photo</p>
+              <Image
+                src="/images/warehouse.jpg"
+                alt="Packaging warehouse and fulfillment center"
+                fill
+                className="object-cover"
+                sizes="(max-width: 1024px) 100vw, 50vw"
+              />
             </motion.div>
           </div>
         </div>

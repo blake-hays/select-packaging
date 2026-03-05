@@ -59,30 +59,35 @@ export const MARKETS = [
     description:
       'FDA-compliant packaging for snacks, frozen foods, sauces, condiments, beverages, dairy, baked goods, and confectionery. We work with co-packers, CPG brands, and food manufacturers to deliver packaging that extends shelf life and drives consumer purchase.',
     icon: 'UtensilsCrossed',
+    image: '/images/food-beverage.jpg',
   },
   {
     title: 'Nutraceuticals',
     description:
       'Supplement, vitamin, and functional food packaging designed to meet FDA and cGMP labeling requirements. Options include tamper-evident closures, moisture barrier pouches, and high-impact graphics that build trust at point of sale.',
     icon: 'Pill',
+    image: '/images/supplements.jpg',
   },
   {
     title: 'Cosmetics & Beauty',
     description:
       'Premium packaging for skincare, haircare, color cosmetics, and personal care products. We offer soft-touch coatings, metallic inks, foil stamping, and specialty finishes that match the luxury look and feel your brand demands.',
     icon: 'Sparkles',
+    image: '/images/cosmetics.jpg',
   },
   {
     title: 'Pet Care',
     description:
       'Durable, shelf-stable packaging for pet food, treats, supplements, and grooming products. Our pet care packaging solutions include heavy-duty stand-up pouches with resealable zippers and high-barrier films that lock in freshness.',
     icon: 'PawPrint',
+    image: '/images/pet-care.jpg',
   },
   {
     title: 'Pharmaceuticals',
     description:
       'Compliant packaging for over-the-counter drugs, medical devices, and health products. We provide tamper-evident cartons, serialized labels, child-resistant closures, and packaging that meets FDA, DEA, and state pharmacy board requirements.',
     icon: 'Cross',
+    image: '/images/supplements.jpg',
   },
   {
     title: 'Household & Consumer',
@@ -95,12 +100,14 @@ export const MARKETS = [
     description:
       'Premium labels, neck wraps, and packaging for craft breweries, wineries, and distilleries. Options include textured stocks, metallic foils, embossed elements, and TTB-compliant label layouts for beer, wine, and spirits.',
     icon: 'Wine',
+    image: '/images/wine-spirits.jpg',
   },
   {
     title: 'Industrial',
     description:
       'Heavy-duty labels and packaging for industrial chemicals, lubricants, automotive parts, adhesives, and building materials. Engineered with UV-resistant inks and durable substrates built to withstand harsh storage and shipping conditions.',
     icon: 'Wrench',
+    image: '/images/industrial.jpg',
   },
   {
     title: 'Cannabis',
@@ -113,6 +120,7 @@ export const MARKETS = [
     description:
       'Packaging engineered for the direct-to-consumer channel — optimized for shipping durability, dimensional weight savings, and a premium unboxing experience that reinforces your brand at the moment of delivery.',
     icon: 'Truck',
+    image: '/images/ecommerce.jpg',
   },
 ]
 
